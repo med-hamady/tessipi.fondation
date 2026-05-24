@@ -1,13 +1,20 @@
 /**
  * Soumission des formulaires vers l'API Django (DRF).
  *
- * Endpoints : /api/<type>/  (contact, newsletter, partners, volunteers, members…)
- * Le proxy /api est configuré dans vite.config.js pour le dev.
+ * Endpoints : <BASE>/<type>/  (contact, newsletter, partners, volunteers, members…)
+ *
+ * Base de l'API :
+ *  - En dev : non définie -> '/api', servi par le proxy Vite (vite.config.js).
+ *  - En prod (Vercel) : définir VITE_API_URL avec l'URL du backend Hostinger,
+ *    ex. https://api.mondomaine.com/api  (sans slash final).
  *
  * Pour revenir à un envoi simulé (sans backend), mettre USE_REAL_API à false.
  */
 
 const USE_REAL_API = true
+
+// Retire un éventuel slash final pour éviter les doubles slashes
+const API_BASE = (import.meta.env.VITE_API_URL || '/api').replace(/\/$/, '')
 
 export async function submitForm(data, type) {
   if (!USE_REAL_API) {
@@ -20,7 +27,7 @@ export async function submitForm(data, type) {
     })
   }
 
-  const response = await fetch(`/api/${type}/`, {
+  const response = await fetch(`${API_BASE}/${type}/`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(data),
