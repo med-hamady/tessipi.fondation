@@ -1,24 +1,27 @@
 import { useState } from 'react'
-import { donationAmounts, donationImpacts } from '../data/content'
+import { useTranslation } from 'react-i18next'
+import { donationAmounts, useContent } from '../data/content'
 import { useToast } from '../context/ToastContext'
 
-function computeImpact(amount, type) {
-  let impact
-  if (amount <= 25) impact = donationImpacts[25]
-  else if (amount <= 50) impact = donationImpacts[50]
-  else if (amount <= 100) impact = donationImpacts[100]
-  else if (amount <= 250) impact = donationImpacts[250]
-  else impact = donationImpacts[500]
-
-  if (type === 'monthly') impact += ' (par mois)'
-  return impact
-}
-
 export default function Donation() {
+  const { t } = useTranslation()
+  const { donationImpacts } = useContent()
   const showToast = useToast()
   const [type, setType] = useState('once')
   const [amount, setAmount] = useState(100)
   const [custom, setCustom] = useState('')
+
+  const computeImpact = (a) => {
+    let impact
+    if (a <= 25) impact = donationImpacts[25]
+    else if (a <= 50) impact = donationImpacts[50]
+    else if (a <= 100) impact = donationImpacts[100]
+    else if (a <= 250) impact = donationImpacts[250]
+    else impact = donationImpacts[500]
+
+    if (type === 'monthly') impact += ' ' + t('donation.perMonth')
+    return impact
+  }
 
   const selectAmount = (value) => {
     setAmount(value)
@@ -33,13 +36,13 @@ export default function Donation() {
 
   const handleDonate = () => {
     if (amount <= 0) {
-      showToast('Veuillez sélectionner un montant', 'error')
+      showToast(t('donation.errors.selectAmount'), 'error')
       return
     }
     const message =
       type === 'monthly'
-        ? `Don mensuel de ${amount}€ configuré avec succès !`
-        : `Don de ${amount}€ enregistré. Merci pour votre générosité !`
+        ? t('donation.success.monthly', { amount })
+        : t('donation.success.once', { amount })
     showToast(message, 'success')
   }
 
@@ -47,10 +50,10 @@ export default function Donation() {
     <section id="don" className="donation-section">
       <div className="container">
         <div className="donation-header">
-          <h2 className="section-title">Faites un don</h2>
+          <h2 className="section-title">{t('donation.title')}</h2>
           <p className="section-subtitle">
-            Chaque contribution, quelle que soit sa taille, transforme des vies.{' '}
-            <span className="highlight-text">87% de vos dons vont directement à nos programmes sur le terrain.</span>
+            {t('donation.subtitle')}{' '}
+            <span className="highlight-text">{t('donation.highlight')}</span>
           </p>
         </div>
 
@@ -60,13 +63,13 @@ export default function Donation() {
               className={`type-btn${type === 'once' ? ' active' : ''}`}
               onClick={() => setType('once')}
             >
-              Une fois
+              {t('donation.once')}
             </button>
             <button
               className={`type-btn${type === 'monthly' ? ' active' : ''}`}
               onClick={() => setType('monthly')}
             >
-              Mensuel
+              {t('donation.monthly')}
             </button>
           </div>
 
@@ -84,7 +87,7 @@ export default function Donation() {
               <input
                 type="number"
                 id="customAmount"
-                placeholder="Montant personnalisé"
+                placeholder={t('donation.custom')}
                 min="1"
                 value={custom}
                 onChange={onCustomChange}
@@ -98,19 +101,19 @@ export default function Donation() {
               <i className="fas fa-heart"></i>
             </div>
             <div className="impact-text">
-              <span className="impact-label">Votre impact</span>
-              <span className="impact-value" id="impactValue">{computeImpact(amount, type)}</span>
+              <span className="impact-label">{t('donation.impactLabel')}</span>
+              <span className="impact-value" id="impactValue">{computeImpact(amount)}</span>
             </div>
           </div>
 
           <button className="btn btn-primary btn-donate" id="donateBtn" onClick={handleDonate}>
             <i className="fas fa-heart"></i>
-            Faire un don
+            {t('donation.cta')}
           </button>
 
           <p className="donation-note">
             <i className="fas fa-lock"></i>
-            Paiement sécurisé • Dons déductibles des impôts • Annulation à tout moment
+            {t('donation.note')}
           </p>
         </div>
       </div>

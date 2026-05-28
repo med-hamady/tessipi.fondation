@@ -1467,7 +1467,9 @@ input, textarea, select {
 
 .footer-legal {
     display: flex;
-    gap: var(--space-6);
+    flex-wrap: wrap;
+    gap: var(--space-3) var(--space-6);
+    justify-content: flex-end;
 }
 
 .footer-legal a {
@@ -1818,4 +1820,121 @@ input, textarea, select {
 .animate-on-scroll.visible {
     opacity: 1;
     transform: translateY(0);
+}
+
+/* ====================================================
+   I18N — Sélecteur de langue (dropdown) + support RTL
+   ==================================================== */
+
+.lang-dropdown {
+    position: relative;
+}
+
+.lang-dropdown .lang-btn {
+    cursor: pointer;
+    border: none;
+}
+
+.lang-menu {
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    min-width: 140px;
+    margin: 0;
+    padding: var(--space-2);
+    list-style: none;
+    background: var(--white);
+    border-radius: var(--radius-lg);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    z-index: 1100;
+    animation: lang-menu-in 0.15s ease-out;
+}
+
+@keyframes lang-menu-in {
+    from { opacity: 0; transform: translateY(-4px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+.lang-option {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    width: 100%;
+    padding: var(--space-2) var(--space-3);
+    font-size: var(--text-sm);
+    font-weight: 500;
+    color: var(--gray-700);
+    background: transparent;
+    border: none;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    text-align: left;
+    transition: background var(--transition-fast), color var(--transition-fast);
+}
+
+.lang-option:hover {
+    background: var(--gray-100);
+}
+
+.lang-option.active {
+    background: var(--primary, #c8102e);
+    color: var(--white);
+}
+
+.lang-option .flag {
+    font-size: var(--text-base);
+}
+
+/* ============ RTL (arabe) ============
+   Inversions minimales : direction du texte, alignements et icônes
+   directionnelles. La grille flex/grid reste fonctionnelle telle quelle. */
+
+html[dir="rtl"] body {
+    text-align: right;
+}
+
+html[dir="rtl"] .lang-menu {
+    right: auto;
+    left: 0;
+}
+
+html[dir="rtl"] .lang-option {
+    text-align: right;
+}
+
+/* Inverse les flèches directionnelles (chevron-down reste, arrow-right s'inverse) */
+html[dir="rtl"] .fa-arrow-right {
+    transform: scaleX(-1);
+}
+
+/* Police adaptée à l'arabe : laisse le navigateur choisir une police arabe lisible */
+html[dir="rtl"] body,
+html[lang="ar"] body {
+    font-family: 'Tajawal', 'Cairo', 'Noto Sans Arabic', system-ui, sans-serif;
+}
+
+/* Le bandeau hero garde son alignement texte gauche en RTL — laissez le texte
+   suivre la direction naturelle */
+html[dir="rtl"] .hero-text,
+html[dir="rtl"] .about-header,
+html[dir="rtl"] .section-header,
+html[dir="rtl"] .donation-header {
+    text-align: right;
+}
+
+html[dir="rtl"] .section-header.text-center,
+html[dir="rtl"] .donation-header {
+    text-align: center;
+}
+
+/* Footer : aligner les colonnes à droite en RTL */
+html[dir="rtl"] .footer-grid,
+html[dir="rtl"] .footer-links ul,
+html[dir="rtl"] .footer-contact {
+    text-align: right;
+}
+
+/* Liste légale footer : aligner à droite et inverser le sens des liens */
+html[dir="rtl"] .footer-legal {
+    justify-content: flex-end;
 }

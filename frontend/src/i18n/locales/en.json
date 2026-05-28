@@ -1,0 +1,317 @@
+{
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "actions": "Our actions",
+    "engage": "Get involved",
+    "transparency": "Transparency",
+    "news": "News",
+    "contact": "Contact",
+    "donate": "Donate",
+    "language": "Language"
+  },
+  "common": {
+    "learnMore": "Learn more",
+    "learnMoreArrow": "Learn more",
+    "readMore": "Read",
+    "viewAll": "View all news",
+    "send": "Send",
+    "submit": "Submit",
+    "close": "Close",
+    "select": "Select...",
+    "loading": "Loading..."
+  },
+  "hero": {
+    "label": "INTERNATIONAL NGO",
+    "title1": "TRANSFORMING",
+    "title2": "LIVES",
+    "title3": "THROUGH ACTION",
+    "description": "TESSIPI Foundation works for equity, safety and support of vulnerable communities around the world.",
+    "ctaDonate": "Make a donation",
+    "ctaActions": "Discover our actions",
+    "stats": {
+      "beneficiaries": "Beneficiaries",
+      "countries": "Countries",
+      "clinics": "Clinics",
+      "founded": "Founded"
+    }
+  },
+  "about": {
+    "label": "WHO WE ARE",
+    "title": "A foundation committed to a fairer world",
+    "p1": "TESSIPI Foundation (Transformative Equity, Safety & Support Initiative for Inclusive Progress) is an international NGO founded in 2008, dedicated to humanitarian aid and sustainable development.",
+    "p2": "We operate in 12 countries through programs in health, education, protection and support for vulnerable communities.",
+    "linkMore": "Learn more about us",
+    "values": {
+      "humanity": { "title": "Humanity", "description": "Act with compassion to relieve human suffering." },
+      "protection": { "title": "Protection", "description": "Defend the most vulnerable and their fundamental rights." },
+      "inclusion": { "title": "Inclusion", "description": "Promote equity and access for all, without discrimination." },
+      "solidarity": { "title": "Solidarity", "description": "Unite our forces for lasting and transformative impact." }
+    }
+  },
+  "actions": {
+    "label": "OUR ACTIONS",
+    "title": "Programs that change lives",
+    "description": "TESSIPI Foundation operates in 6 priority areas to meet the essential needs of vulnerable communities around the world.",
+    "items": {
+      "health": {
+        "alt": "Health & Well-being",
+        "badge": "147K+ beneficiaries",
+        "title": "Health & Well-being",
+        "description": "Medical consultations, vaccinations, screening campaigns and mobile clinics in remote areas. We train community health workers to ensure continuous follow-up."
+      },
+      "nutrition": {
+        "alt": "Nutrition & Food",
+        "badge": "89 active programs",
+        "title": "Nutrition & Food",
+        "description": "Distribution of food kits, nutritional supplementation programs for children and pregnant women, and education on healthy eating practices."
+      },
+      "education": {
+        "alt": "Education & Development",
+        "badge": "45 schools supported",
+        "title": "Education & Development",
+        "description": "Building schools, training teachers, distributing school supplies and adult literacy programs. Education is the key to autonomy."
+      },
+      "protection": {
+        "alt": "Protection & Inclusion",
+        "badge": "12 protection centers",
+        "title": "Protection & Inclusion",
+        "description": "Protection of vulnerable populations, defense of human rights, support for refugees and displaced people. Creation of safe spaces for women and children."
+      },
+      "water": {
+        "alt": "Water, Hygiene & Sanitation",
+        "badge": "234 water points created",
+        "title": "Water, Hygiene & Sanitation",
+        "description": "Drilling wells, installing water pumps, building latrines and raising awareness of hygiene practices. Access to drinking water is a fundamental right."
+      },
+      "emergency": {
+        "alt": "Emergency & Rehabilitation",
+        "badge": "24/7 available",
+        "title": "Emergency & Rehabilitation",
+        "description": "Rapid response to natural disasters or conflicts, distribution of emergency aid, and rehabilitation programs for community reconstruction."
+      }
+    }
+  },
+  "engage": {
+    "label": "GET INVOLVED",
+    "title": "Join the action",
+    "description": "In any way you can — your time, your skills or your support.",
+    "items": {
+      "donate": {
+        "title": "Make a donation",
+        "description": "Fund care days, meals and supplies. Every contribution reaches a family directly.",
+        "cta": "Donate now"
+      },
+      "partner": {
+        "title": "Become a partner",
+        "description": "Institutions, companies or NGOs: join us to amplify our humanitarian impact.",
+        "cta": "Propose a partnership"
+      },
+      "volunteer": {
+        "title": "Become a volunteer",
+        "description": "Join a clinic day or mentor a new health worker. Your time changes lives.",
+        "cta": "Sign up"
+      },
+      "member": {
+        "title": "Become a member",
+        "description": "Join the TESSIPI community and take an active part in our humanitarian work.",
+        "cta": "Become a member"
+      }
+    }
+  },
+  "transparency": {
+    "label": "TRANSPARENCY",
+    "title": "Trust built on transparency",
+    "description": "An NGO's credibility rests on its openness. Browse our reports and policies to understand how we work.",
+    "cards": {
+      "reports": { "title": "Activity reports", "description": "Read our annual reports detailing our actions and results.", "link": "Download" },
+      "financial": { "title": "Financial reports", "description": "Full transparency on how funds are used.", "link": "View" },
+      "ethics": { "title": "Ethics policy", "description": "Our ethical and professional commitments.", "link": "Read" },
+      "safeguard": { "title": "Beneficiary safeguarding", "description": "Our policy to protect vulnerable populations.", "link": "Discover" }
+    },
+    "stats": {
+      "programs": "Of funds to programs",
+      "admin": "Administrative costs",
+      "fiscal": "Fiscal transparency",
+      "rating": "Charity Navigator rating"
+    }
+  },
+  "donation": {
+    "title": "Make a donation",
+    "subtitle": "Every contribution, no matter the size, transforms lives.",
+    "highlight": "87% of your donations go directly to our programs on the ground.",
+    "once": "One-time",
+    "monthly": "Monthly",
+    "custom": "Custom amount",
+    "impactLabel": "Your impact",
+    "cta": "Donate",
+    "note": "Secure payment • Tax-deductible donations • Cancel anytime",
+    "perMonth": "(per month)",
+    "impacts": {
+      "25": "Hygiene kit for a family",
+      "50": "Basic medical consultation",
+      "100": "Full medical consultation",
+      "250": "Food kit for a family (1 month)",
+      "500": "Schooling for a child (1 year)"
+    },
+    "errors": {
+      "selectAmount": "Please select an amount"
+    },
+    "success": {
+      "monthly": "Monthly donation of €{{amount}} set up successfully!",
+      "once": "Donation of €{{amount}} recorded. Thank you for your generosity!"
+    }
+  },
+  "news": {
+    "label": "NEWS",
+    "title": "Our latest news",
+    "viewAll": "View all news",
+    "read": "Read",
+    "categories": {
+      "nouveau_projet": "New project",
+      "evenement": "Event",
+      "temoignage": "Testimony",
+      "rapport": "Report",
+      "autre": "Other"
+    },
+    "items": {
+      "clinic": {
+        "alt": "New clinic",
+        "category": "New project",
+        "title": "Opening of a new clinic in East Africa",
+        "excerpt": "TESSIPI Foundation opens a new pediatric clinic that will care for more than 5,000 children per year.",
+        "date": "Feb 10, 2026"
+      },
+      "training": {
+        "alt": "Health worker training",
+        "category": "Event",
+        "title": "International training for community health workers",
+        "excerpt": "Join our virtual training program to become a certified TESSIPI community health worker.",
+        "date": "Mar 4, 2026"
+      },
+      "testimony": {
+        "alt": "Amina's story",
+        "category": "Testimony",
+        "title": "How a screening saved a school year",
+        "excerpt": "Amina's story: a young girl whose life was transformed thanks to a simple vision screening.",
+        "date": "Jan 22, 2026"
+      }
+    }
+  },
+  "impact": {
+    "label": "OUR IMPACT",
+    "title": "Key figures",
+    "description": "Concrete results that reflect our commitment alongside vulnerable communities.",
+    "items": {
+      "beneficiaries": { "label": "Beneficiaries", "sublabel": "People helped" },
+      "countries": { "label": "Countries", "sublabel": "Areas of operation" },
+      "clinics": { "label": "Clinics", "sublabel": "Health centers" },
+      "founded": { "label": "Year founded", "sublabel": "Years of experience" },
+      "water": { "label": "Water points", "sublabel": "Wells and pumps" },
+      "schools": { "label": "Schools", "sublabel": "Schools supported" }
+    }
+  },
+  "contact": {
+    "label": "CONTACT",
+    "title": "Let's talk about your project",
+    "description": "Send us a message, request a partnership pack, or set up a monthly donation.",
+    "address": "Address",
+    "addressValue": "123 Rue de la Solidarité\n75001 Paris, France",
+    "email": "Email",
+    "phone": "Phone",
+    "social": "Social networks",
+    "form": {
+      "name": "Full name",
+      "namePh": "Your name",
+      "email": "Email",
+      "emailPh": "your@email.com",
+      "subject": "Subject",
+      "subjectPh": "How can we help you?",
+      "message": "Message",
+      "messagePh": "Your message...",
+      "submit": "Send message"
+    },
+    "toast": {
+      "required": "Please fill in all fields",
+      "success": "Message sent successfully!",
+      "error": "Sending failed. Please try again."
+    }
+  },
+  "footer": {
+    "tagline": "Transformative Equity, Safety & Support Initiative for Inclusive Progress.",
+    "newsletter": "Newsletter",
+    "newsletterIntro": "Get our news — no spam.",
+    "newsletterPh": "Your email",
+    "newsletterSubscribe": "Subscribe",
+    "about": "About",
+    "engage": "Get involved",
+    "contact": "Contact",
+    "donate": "Make a donation",
+    "partner": "Become a partner",
+    "volunteer": "Volunteering",
+    "member": "Become a member",
+    "rights": "© 2026 TESSIPI Foundation. All rights reserved.",
+    "legal": {
+      "mentions": "Legal notice",
+      "privacy": "Privacy policy",
+      "data": "Data protection",
+      "cookies": "Cookies",
+      "transparency": "Financial transparency",
+      "abuse": "Anti-abuse commitment",
+      "peas": "PSEA / Ethics",
+      "report": "Report a case"
+    },
+    "toast": {
+      "required": "Please enter your email",
+      "success": "Successfully subscribed to the newsletter!",
+      "error": "Subscription failed."
+    }
+  },
+  "floatingDonate": "Donate",
+  "modals": {
+    "common": {
+      "submit": "Send",
+      "error": "Something went wrong. Please try again."
+    },
+    "partner": {
+      "title": "Become a partner",
+      "intro": "Join our network of partners and amplify your social impact.",
+      "organization": "Organization name",
+      "email": "Email",
+      "type": "Type of partnership",
+      "options": {
+        "financial": "Financial partnership",
+        "technical": "Technical partnership",
+        "media": "Media partnership",
+        "other": "Other"
+      },
+      "submit": "Send request",
+      "success": "Partnership request sent!"
+    },
+    "volunteer": {
+      "title": "Become a volunteer",
+      "intro": "Your time and skills can change lives.",
+      "name": "Full name",
+      "email": "Email",
+      "expertise": "Area of expertise",
+      "options": {
+        "health": "Health",
+        "education": "Education",
+        "admin": "Administration",
+        "communication": "Communication",
+        "other": "Other"
+      },
+      "submit": "Sign up",
+      "success": "Volunteer registration successful!"
+    },
+    "member": {
+      "title": "Become a TESSIPI member",
+      "intro": "Join our community of committed members.",
+      "name": "Full name",
+      "email": "Email",
+      "phone": "Phone",
+      "submit": "Become a member",
+      "success": "Membership request sent!"
+    }
+  }
+}

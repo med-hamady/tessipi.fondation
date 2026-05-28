@@ -200,8 +200,14 @@ class News(models.Model):
         ARCHIVED = 'archived', 'Archivé'
 
     title = models.CharField(max_length=200)
+    title_en = models.CharField(max_length=200, blank=True, default='')
+    title_ar = models.CharField(max_length=200, blank=True, default='')
     excerpt = models.TextField(null=True, blank=True)
+    excerpt_en = models.TextField(blank=True, default='')
+    excerpt_ar = models.TextField(blank=True, default='')
     content = models.TextField(null=True, blank=True)
+    content_en = models.TextField(blank=True, default='')
+    content_ar = models.TextField(blank=True, default='')
     category = models.CharField(max_length=15, choices=Category.choices, default=Category.AUTRE)
     image = models.CharField(max_length=255, null=True, blank=True)
     author = models.CharField(max_length=100, null=True, blank=True)
@@ -220,14 +226,55 @@ class News(models.Model):
 
 
 class Stat(models.Model):
+    """Chiffre clé de la section « Notre impact » (géré par l'admin)."""
+
     stat_key = models.CharField(max_length=50, unique=True)
     stat_value = models.IntegerField(default=0)
     stat_label = models.CharField(max_length=100)
+    stat_label_en = models.CharField(max_length=100, blank=True, default='')
+    stat_label_ar = models.CharField(max_length=100, blank=True, default='')
     description = models.TextField(null=True, blank=True)
+    description_en = models.TextField(blank=True, default='')
+    description_ar = models.TextField(blank=True, default='')
+    # Champs d'affichage pour la section publique « Notre impact »
+    icon = models.CharField(max_length=50, default='fa-chart-bar', blank=True)
+    suffix = models.CharField(max_length=10, default='', blank=True)
+    display_order = models.PositiveIntegerField(default=0)
+    is_active = models.BooleanField(default=True)
     updated_at = models.DateTimeField(auto_now=True)
 
     class Meta:
         db_table = 'stats'
+        ordering = ['display_order', 'id']
 
     def __str__(self):
         return f'{self.stat_label}: {self.stat_value}'
+
+
+class Action(models.Model):
+    """Programme/domaine d'intervention de la section « Nos actions » (géré par l'admin)."""
+
+    title = models.CharField(max_length=150)
+    title_en = models.CharField(max_length=150, blank=True, default='')
+    title_ar = models.CharField(max_length=150, blank=True, default='')
+    description = models.TextField()
+    description_en = models.TextField(blank=True, default='')
+    description_ar = models.TextField(blank=True, default='')
+    image = models.CharField(max_length=255, blank=True, default='')
+    alt = models.CharField(max_length=150, blank=True, default='')
+    alt_en = models.CharField(max_length=150, blank=True, default='')
+    alt_ar = models.CharField(max_length=150, blank=True, default='')
+    badge = models.CharField(max_length=100, blank=True, default='')
+    badge_en = models.CharField(max_length=100, blank=True, default='')
+    badge_ar = models.CharField(max_length=100, blank=True, default='')
+    display_order = models.PositiveIntegerField(default=0)
+    is_active = models.BooleanField(default=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        db_table = 'actions'
+        ordering = ['display_order', 'id']
+
+    def __str__(self):
+        return self.title

@@ -1,66 +1,41 @@
-import { useCallback, useEffect, useState } from 'react'
-import Navbar from './components/Navbar'
-import Hero from './components/Hero'
-import Donation from './components/Donation'
-import About from './components/About'
-import Actions from './components/Actions'
-import Engage from './components/Engage'
-import Transparency from './components/Transparency'
-import News from './components/News'
-import Impact from './components/Impact'
-import Contact from './components/Contact'
-import Footer from './components/Footer'
-import FloatingDonate from './components/FloatingDonate'
-import Modals from './components/Modals'
-import { ModalProvider } from './context/ModalContext'
+import { Navigate, Route, Routes } from 'react-router-dom'
+import PublicSite from './PublicSite'
+import { AuthProvider } from './admin/AuthContext'
+import ProtectedRoute from './admin/ProtectedRoute'
+import Login from './admin/Login'
+import Dashboard from './admin/Dashboard'
+import { ActionsManager, NewsManager, StatsManager } from './admin/managers'
+import LegalPage from './legal/LegalPage'
+import './admin/admin.css'
 
 export default function App() {
-  const [activeModal, setActiveModal] = useState(null)
-
-  const openModal = useCallback((name) => setActiveModal(name), [])
-  const closeModal = useCallback(() => setActiveModal(null), [])
-
-  // Scroll doux pour tous les liens d'ancre, avec un offset pour la navbar fixe.
-  // Délégation au niveau document, comme l'ancien initSmoothScroll().
-  useEffect(() => {
-    function onClick(e) {
-      const anchor = e.target.closest('a[href^="#"]')
-      if (!anchor) return
-      const href = anchor.getAttribute('href')
-      if (href === '#') return
-
-      const target = document.querySelector(href)
-      if (target) {
-        e.preventDefault()
-        window.scrollTo({ top: target.offsetTop - 80, behavior: 'smooth' })
-      }
-    }
-    document.addEventListener('click', onClick)
-    return () => document.removeEventListener('click', onClick)
-  }, [])
-
-  // Respecte la préférence de réduction des animations
-  useEffect(() => {
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      document.documentElement.style.scrollBehavior = 'auto'
-    }
-  }, [])
-
   return (
-    <ModalProvider openModal={openModal}>
-      <Navbar />
-      <Hero />
-      <Donation />
-      <About />
-      <Actions />
-      <Engage />
-      <Transparency />
-      <News />
-      <Impact />
-      <Contact />
-      <Footer />
-      <FloatingDonate />
-      <Modals active={activeModal} onClose={closeModal} />
-    </ModalProvider>
+    <AuthProvider>
+      <Routes>
+        {/* Site public */}
+        <Route path="/" element={<PublicSite />} />
+
+        {/* Pages légales (footer) */}
+        <Route path="/legal/:slug" element={<LegalPage />} />
+
+        {/* Administration */}
+        <Route path="/admin/login" element={<Login />} />
+        <Route
+          path="/admin"
+          element={
+            <ProtectedRoute>
+              <Dashboard />
+            </ProtectedRoute>
+          }
+        >
+          <Route index element={<ActionsManager />} />
+          <Route path="actualites" element={<NewsManager />} />
+          <Route path="impact" element={<StatsManager />} />
+        </Route>
+
+        {/* Fallback */}
+        <Route path="*" element={<Navigate to="/" replace />} />
+      </Routes>
+    </AuthProvider>
   )
 }

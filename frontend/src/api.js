@@ -46,3 +46,23 @@ export function isValidEmail(email) {
   const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
   return re.test(email)
 }
+
+/**
+ * Lectures publiques des contenus pilotés par l'admin.
+ * Chaque fonction renvoie un tableau ; en cas d'erreur réseau elle relaie
+ * l'exception pour que l'appelant puisse retomber sur les données statiques.
+ */
+async function fetchList(path, lang) {
+  const query = lang ? `?lang=${encodeURIComponent(lang)}` : ''
+  const response = await fetch(`${API_BASE}/${path}/${query}`)
+  if (!response.ok) throw new Error(`Erreur API (${response.status})`)
+  const result = await response.json()
+  return result.data || []
+}
+
+export const fetchActions = (lang) => fetchList('actions', lang)
+export const fetchStats = (lang) => fetchList('stats', lang)
+export const fetchNews = (lang) => fetchList('news', lang)
+
+// Base utilisée aussi par le module d'administration (adminApi.js)
+export { API_BASE }

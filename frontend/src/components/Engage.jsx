@@ -1,19 +1,20 @@
+import { useTranslation } from 'react-i18next'
 import Reveal from './Reveal'
-import { engagements } from '../data/content'
+import { useContent } from '../data/content'
 import { useModal } from '../context/ModalContext'
 
 export default function Engage() {
+  const { t } = useTranslation()
+  const { engagements } = useContent()
   const openModal = useModal()
 
   return (
     <section id="engager" className="engage-section">
       <div className="container">
         <div className="section-header text-center">
-          <span className="section-label">S'ENGAGER</span>
-          <h2 className="section-title">Rejoignez l'action</h2>
-          <p className="section-description">
-            De quelque manière que ce soit — votre temps, vos compétences ou votre soutien.
-          </p>
+          <span className="section-label">{t('engage.label')}</span>
+          <h2 className="section-title">{t('engage.title')}</h2>
+          <p className="section-description">{t('engage.description')}</p>
         </div>
 
         <div className="engage-grid">

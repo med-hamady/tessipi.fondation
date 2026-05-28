@@ -1,16 +1,18 @@
+import { useTranslation } from 'react-i18next'
 import Reveal from './Reveal'
-import { transparencyCards, transparencyStats } from '../data/content'
+import { useContent } from '../data/content'
 
 export default function Transparency() {
+  const { t } = useTranslation()
+  const { transparencyCards, transparencyStats } = useContent()
+
   return (
     <section id="transparence" className="transparency-section">
       <div className="container">
         <div className="section-header text-center">
-          <span className="section-label">TRANSPARENCE</span>
-          <h2 className="section-title">Une confiance fondée sur la transparence</h2>
-          <p className="section-description">
-            La crédibilité d'une ONG repose sur son ouverture. Consultez nos rapports et politiques pour comprendre comment nous travaillons.
-          </p>
+          <span className="section-label">{t('transparency.label')}</span>
+          <h2 className="section-title">{t('transparency.title')}</h2>
+          <p className="section-description">{t('transparency.description')}</p>
         </div>
 
         <div className="transparency-grid">

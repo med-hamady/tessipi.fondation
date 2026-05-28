@@ -1,22 +1,20 @@
+import { useTranslation } from 'react-i18next'
 import Reveal from './Reveal'
-import { values } from '../data/content'
+import { useContent } from '../data/content'
 
 export default function About() {
+  const { t } = useTranslation()
+  const { values } = useContent()
+
   return (
     <section id="apropos" className="about-section">
       <div className="container">
         <div className="about-header">
-          <span className="section-label">QUI SOMMES-NOUS</span>
-          <h2 className="section-title">Une fondation engagée pour un monde plus juste</h2>
-          <p className="about-description">
-            TESSIPI Foundation (Transformative Equity, Safety & Support Initiative for Inclusive Progress)
-            est une ONG internationale créée en 2008, dédiée à l'aide humanitaire et au développement durable.
-          </p>
-          <p className="about-description">
-            Nous intervenons dans 12 pays à travers des programmes de santé, d'éducation, de protection
-            et d'accompagnement des communautés vulnérables.
-          </p>
-          <a href="#" className="link-arrow">En savoir plus sur nous <i className="fas fa-arrow-right"></i></a>
+          <span className="section-label">{t('about.label')}</span>
+          <h2 className="section-title">{t('about.title')}</h2>
+          <p className="about-description">{t('about.p1')}</p>
+          <p className="about-description">{t('about.p2')}</p>
+          <a href="#" className="link-arrow">{t('about.linkMore')} <i className="fas fa-arrow-right"></i></a>
         </div>
 
         <div className="values-grid">

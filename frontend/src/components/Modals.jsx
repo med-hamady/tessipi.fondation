@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import Modal from './Modal'
 import { submitForm } from '../api'
 import { useToast } from '../context/ToastContext'
@@ -7,6 +8,7 @@ import { useToast } from '../context/ToastContext'
  * `active` vaut 'partner' | 'volunteer' | 'member' | null.
  */
 export default function Modals({ active, onClose }) {
+  const { t } = useTranslation()
   const showToast = useToast()
 
   const handleSubmit = (type, successMessage) => async (e) => {
@@ -18,7 +20,7 @@ export default function Modals({ active, onClose }) {
       e.target.reset()
       onClose()
     } catch {
-      showToast("Une erreur est survenue. Veuillez réessayer.", 'error')
+      showToast(t('modals.common.error'), 'error')
     }
   }
 
@@ -27,82 +29,82 @@ export default function Modals({ active, onClose }) {
       <Modal
         open={active === 'partner'}
         onClose={onClose}
-        title="Devenir partenaire"
-        intro="Rejoignez notre réseau de partenaires et amplifiez votre impact social."
+        title={t('modals.partner.title')}
+        intro={t('modals.partner.intro')}
       >
-        <form onSubmit={handleSubmit('partners', 'Demande de partenariat envoyée !')}>
+        <form onSubmit={handleSubmit('partners', t('modals.partner.success'))}>
           <div className="form-group">
-            <label>Nom de l'organisation</label>
+            <label>{t('modals.partner.organization')}</label>
             <input type="text" name="organization" required />
           </div>
           <div className="form-group">
-            <label>Email</label>
+            <label>{t('modals.partner.email')}</label>
             <input type="email" name="email" required />
           </div>
           <div className="form-group">
-            <label>Type de partenariat souhaité</label>
+            <label>{t('modals.partner.type')}</label>
             <select name="partnership_type" required defaultValue="">
-              <option value="">Sélectionnez...</option>
-              <option value="financier">Partenariat financier</option>
-              <option value="technique">Partenariat technique</option>
-              <option value="media">Partenariat média</option>
-              <option value="autre">Autre</option>
+              <option value="">{t('common.select')}</option>
+              <option value="financier">{t('modals.partner.options.financial')}</option>
+              <option value="technique">{t('modals.partner.options.technical')}</option>
+              <option value="media">{t('modals.partner.options.media')}</option>
+              <option value="autre">{t('modals.partner.options.other')}</option>
             </select>
           </div>
-          <button type="submit" className="btn btn-primary">Envoyer la demande</button>
+          <button type="submit" className="btn btn-primary">{t('modals.partner.submit')}</button>
         </form>
       </Modal>
 
       <Modal
         open={active === 'volunteer'}
         onClose={onClose}
-        title="Devenir bénévole"
-        intro="Votre temps et vos compétences peuvent changer des vies."
+        title={t('modals.volunteer.title')}
+        intro={t('modals.volunteer.intro')}
       >
-        <form onSubmit={handleSubmit('volunteers', 'Inscription en tant que bénévole réussie !')}>
+        <form onSubmit={handleSubmit('volunteers', t('modals.volunteer.success'))}>
           <div className="form-group">
-            <label>Nom complet</label>
+            <label>{t('modals.volunteer.name')}</label>
             <input type="text" name="name" required />
           </div>
           <div className="form-group">
-            <label>Email</label>
+            <label>{t('modals.volunteer.email')}</label>
             <input type="email" name="email" required />
           </div>
           <div className="form-group">
-            <label>Domaine d'expertise</label>
+            <label>{t('modals.volunteer.expertise')}</label>
             <select name="expertise" required defaultValue="">
-              <option value="">Sélectionnez...</option>
-              <option value="sante">Santé</option>
-              <option value="education">Éducation</option>
-              <option value="admin">Administration</option>
-              <option value="communication">Communication</option>
-              <option value="autre">Autre</option>
+              <option value="">{t('common.select')}</option>
+              <option value="sante">{t('modals.volunteer.options.health')}</option>
+              <option value="education">{t('modals.volunteer.options.education')}</option>
+              <option value="admin">{t('modals.volunteer.options.admin')}</option>
+              <option value="communication">{t('modals.volunteer.options.communication')}</option>
+              <option value="autre">{t('modals.volunteer.options.other')}</option>
             </select>
           </div>
-          <button type="submit" className="btn btn-primary">S'inscrire</button>
+          <button type="submit" className="btn btn-primary">{t('modals.volunteer.submit')}</button>
         </form>
       </Modal>
 
       <Modal
         open={active === 'member'}
         onClose={onClose}
-        title="Adhérer à TESSIPI"
-        intro="Rejoignez notre communauté de membres engagés."
+        title={t('modals.member.title')}
+        intro={t('modals.member.intro')}
       >
-        <form onSubmit={handleSubmit('members', "Demande d'adhésion envoyée !")}>
+        <form onSubmit={handleSubmit('members', t('modals.member.success'))}>
           <div className="form-group">
-            <label>Nom complet</label>
+            <label>{t('modals.member.name')}</label>
             <input type="text" name="name" required />
           </div>
           <div className="form-group">
-            <label>Email</label>
+            <label>{t('modals.member.email')}</label>
             <input type="email" name="email" required />
           </div>
           <div className="form-group">
-            <label>Téléphone</label>
+            <label>{t('modals.member.phone')}</label>
             <input type="tel" name="phone" required />
           </div>
-          <button type="submit" className="btn btn-primary">Devenir membre</button>
+          <button type="submit" className="btn btn-primary">{t('modals.member.submit')}</button>
         </form>
       </Modal>
     </>

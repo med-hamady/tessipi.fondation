@@ -1,17 +1,25 @@
-import { useEffect, useState } from 'react'
-import { navLinks } from '../data/content'
+import { useEffect, useRef, useState } from 'react'
+import { useTranslation } from 'react-i18next'
+import { useContent } from '../data/content'
+
+const LANGS = [
+  { code: 'fr', flag: '🇫🇷', label: 'FR' },
+  { code: 'en', flag: '🇬🇧', label: 'EN' },
+  { code: 'ar', flag: '🇸🇦', label: 'AR' },
+]
 
 export default function Navbar() {
+  const { t, i18n } = useTranslation()
+  const { navLinks } = useContent()
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
   const [activeSection, setActiveSection] = useState('accueil')
-  const [lang, setLang] = useState('fr')
+  const [langOpen, setLangOpen] = useState(false)
+  const langRef = useRef(null)
 
   useEffect(() => {
     function onScroll() {
       setScrolled(window.scrollY > 50)
-
-      // Détermine la section active (équivalent updateActiveNavLink)
       let current = ''
       document.querySelectorAll('section[id]').forEach((section) => {
         const top = section.offsetTop - 100
@@ -21,18 +29,30 @@ export default function Navbar() {
       })
       if (current) setActiveSection(current)
     }
-
     window.addEventListener('scroll', onScroll)
     onScroll()
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
-  // Bloque le scroll du body quand le menu mobile est ouvert
   useEffect(() => {
     document.body.style.overflow = menuOpen ? 'hidden' : ''
   }, [menuOpen])
 
-  const toggleLang = () => setLang((l) => (l === 'fr' ? 'en' : 'fr'))
+  // Ferme le dropdown langue au clic à l'extérieur.
+  useEffect(() => {
+    if (!langOpen) return
+    function onDocClick(e) {
+      if (langRef.current && !langRef.current.contains(e.target)) setLangOpen(false)
+    }
+    document.addEventListener('mousedown', onDocClick)
+    return () => document.removeEventListener('mousedown', onDocClick)
+  }, [langOpen])
+
+  const current = LANGS.find((l) => l.code === i18n.language) ?? LANGS[0]
+  const changeLang = (code) => {
+    i18n.changeLanguage(code)
+    setLangOpen(false)
+  }
 
   return (
     <nav className={`navbar${scrolled ? ' scrolled' : ''}`} id="navbar">
@@ -67,12 +87,40 @@ export default function Navbar() {
         </ul>
 
         <div className="nav-actions">
-          <button className="lang-btn" id="langBtn" onClick={toggleLang}>
-            <span className="flag">{lang === 'fr' ? '🇫🇷' : '🇬🇧'}</span>
-            <span>{lang === 'fr' ? 'FR' : 'EN'}</span>
-            <i className="fas fa-chevron-down"></i>
-          </button>
-          <a href="#don" className="btn btn-primary">Donner</a>
+          <div className={`lang-dropdown${langOpen ? ' open' : ''}`} ref={langRef}>
+            <button
+              type="button"
+              className="lang-btn"
+              id="langBtn"
+              aria-haspopup="listbox"
+              aria-expanded={langOpen}
+              aria-label={t('nav.language')}
+              onClick={() => setLangOpen((o) => !o)}
+            >
+              <span className="flag">{current.flag}</span>
+              <span>{current.label}</span>
+              <i className={`fas fa-chevron-${langOpen ? 'up' : 'down'}`}></i>
+            </button>
+            {langOpen && (
+              <ul className="lang-menu" role="listbox">
+                {LANGS.map((l) => (
+                  <li key={l.code}>
+                    <button
+                      type="button"
+                      role="option"
+                      aria-selected={l.code === current.code}
+                      className={`lang-option${l.code === current.code ? ' active' : ''}`}
+                      onClick={() => changeLang(l.code)}
+                    >
+                      <span className="flag">{l.flag}</span>
+                      <span>{l.label}</span>
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
+          <a href="#don" className="btn btn-primary">{t('nav.donate')}</a>
         </div>
       </div>
     </nav>

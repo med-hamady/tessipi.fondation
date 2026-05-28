@@ -1,9 +1,12 @@
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 import { submitForm } from '../api'
 import { useToast } from '../context/ToastContext'
 import { useModal } from '../context/ModalContext'
 
 export default function Footer() {
+  const { t } = useTranslation()
   const showToast = useToast()
   const openModal = useModal()
   const [email, setEmail] = useState('')
@@ -11,19 +14,18 @@ export default function Footer() {
   const handleNewsletter = async (e) => {
     e.preventDefault()
     if (!email) {
-      showToast('Veuillez entrer votre email', 'error')
+      showToast(t('footer.toast.required'), 'error')
       return
     }
     try {
       await submitForm({ email }, 'newsletter')
-      showToast('Inscription à la newsletter réussie !', 'success')
+      showToast(t('footer.toast.success'), 'success')
       setEmail('')
     } catch {
-      showToast("Erreur lors de l'inscription.", 'error')
+      showToast(t('footer.toast.error'), 'error')
     }
   }
 
-  // Ouvre une modale depuis un lien de footer sans naviguer
   const modalLink = (target) => (e) => {
     e.preventDefault()
     openModal(target)
@@ -35,20 +37,20 @@ export default function Footer() {
         <div className="footer-grid">
           <div className="footer-brand">
             <img src="/images/logo.svg" alt="TESSIPI Foundation" className="footer-logo" />
-            <p className="footer-tagline">Transformative Equity, Safety & Support Initiative for Inclusive Progress.</p>
+            <p className="footer-tagline">{t('footer.tagline')}</p>
 
             <div className="newsletter">
-              <h4>Newsletter</h4>
-              <p>Recevez nos actualités — pas de spam.</p>
+              <h4>{t('footer.newsletter')}</h4>
+              <p>{t('footer.newsletterIntro')}</p>
               <form className="newsletter-form" id="newsletterForm" onSubmit={handleNewsletter}>
                 <input
                   type="email"
-                  placeholder="Votre email"
+                  placeholder={t('footer.newsletterPh')}
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
                 />
-                <button type="submit" aria-label="S'inscrire">
+                <button type="submit" aria-label={t('footer.newsletterSubscribe')}>
                   <i className="fas fa-arrow-right"></i>
                 </button>
               </form>
@@ -56,28 +58,28 @@ export default function Footer() {
           </div>
 
           <div className="footer-links">
-            <h4>À propos</h4>
+            <h4>{t('footer.about')}</h4>
             <ul>
-              <li><a href="#apropos">À propos</a></li>
-              <li><a href="#actions">Nos actions</a></li>
-              <li><a href="#transparence">Transparence</a></li>
-              <li><a href="#actualites">Actualités</a></li>
+              <li><a href="#apropos">{t('nav.about')}</a></li>
+              <li><a href="#actions">{t('nav.actions')}</a></li>
+              <li><a href="#transparence">{t('nav.transparency')}</a></li>
+              <li><a href="#actualites">{t('nav.news')}</a></li>
             </ul>
           </div>
 
           <div className="footer-links">
-            <h4>S'engager</h4>
+            <h4>{t('footer.engage')}</h4>
             <ul>
-              <li><a href="#don">Faire un don</a></li>
-              <li><a href="#" onClick={modalLink('partner')}>Devenir partenaire</a></li>
-              <li><a href="#" onClick={modalLink('volunteer')}>Bénévolat</a></li>
-              <li><a href="#" onClick={modalLink('member')}>Adhérer</a></li>
+              <li><a href="#don">{t('footer.donate')}</a></li>
+              <li><a href="#" onClick={modalLink('partner')}>{t('footer.partner')}</a></li>
+              <li><a href="#" onClick={modalLink('volunteer')}>{t('footer.volunteer')}</a></li>
+              <li><a href="#" onClick={modalLink('member')}>{t('footer.member')}</a></li>
             </ul>
           </div>
 
           <div className="footer-contact">
-            <h4>Contact</h4>
-            <p>123 Rue de la Solidarité<br />75001 Paris, France</p>
+            <h4>{t('footer.contact')}</h4>
+            <p style={{ whiteSpace: 'pre-line' }}>{t('contact.addressValue')}</p>
             <a href="mailto:contact@tessipi.org">contact@tessipi.org</a>
             <a href="tel:+33123456789">+33 1 23 45 67 89</a>
             <div className="footer-social">
@@ -90,12 +92,16 @@ export default function Footer() {
         </div>
 
         <div className="footer-bottom">
-          <p>&copy; 2026 TESSIPI Foundation. Tous droits réservés.</p>
+          <p>{t('footer.rights')}</p>
           <div className="footer-legal">
-            <a href="#">Mentions légales</a>
-            <a href="#">Politique de confidentialité</a>
-            <a href="#">Politique de cookies</a>
-            <a href="#">Conditions d'utilisation</a>
+            <Link to="/legal/mentions-legales">{t('footer.legal.mentions')}</Link>
+            <Link to="/legal/politique-confidentialite">{t('footer.legal.privacy')}</Link>
+            <Link to="/legal/protection-donnees">{t('footer.legal.data')}</Link>
+            <Link to="/legal/cookies">{t('footer.legal.cookies')}</Link>
+            <Link to="/legal/transparence-financiere">{t('footer.legal.transparency')}</Link>
+            <Link to="/legal/engagement-abus">{t('footer.legal.abuse')}</Link>
+            <Link to="/legal/peas">{t('footer.legal.peas')}</Link>
+            <Link to="/legal/signaler">{t('footer.legal.report')}</Link>
           </div>
         </div>
       </div>
